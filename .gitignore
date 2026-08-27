@@ -1,6 +1,10 @@
+# Environments and cache
 venv/
 __pycache__/
 *.pyc
 .env
+
+# Data and Databases (Private)
+knowledge/
 chroma_db/
 vector_index.pkl
