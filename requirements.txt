@@ -6,3 +6,7 @@ torch
 rich
 pymupdf
 ollama
+psutil
+'''In your research paper, we will describe psutil 
+as our "Telemetry Module." It allows the brain to 
+monitor its own "metabolism" (RAM and CPU usage).'''

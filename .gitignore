@@ -8,3 +8,9 @@ __pycache__/
 knowledge/
 chroma_db/
 vector_index.pkl
+
+# Raw Research Data (Messy/Private)
+research/data/
+
+# Allow only the final drafts to be public
+!research/drafts/*.md
