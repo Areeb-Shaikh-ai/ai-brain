@@ -29,16 +29,23 @@ The current AI landscape is dominated by cloud-based inference, which poses sign
 *   **Storage:** NVMe SSD (D: Drive Project Root)
 
 ## 3. Results and Data Analysis
-*Note: Data points gathered on August 29-30, 2026.*
+Experiments conducted on August 31, 2026, compared two parameter scales of the Qwen 2.5 family.
 
-| Metric | Clean State (Run 1) | With System Interrupt (Run 2) |
-| :--- | :--- | :--- |
-| **Inference Time (s)** | 16.27 s | 29.55 s |
-| **Throughput (TPS)** | 10.56 TPS | 5.02 TPS |
-| **Performance Delta** | Baseline | -45.1% |
+### 3.1 Inference Throughput (Table 1)
+| Model Scale | Peak Throughput (TPS) | Avg. Speed | Latency (Long Prompt) |
+| :--- | :--- | :--- | :--- |
+| **Qwen 2.5 3B** | 10.78 TPS | ~8.2 TPS | 67.79 s |
+| **Qwen 2.5 0.5B** | 41.18 TPS | ~31.9 TPS | 11.56 s |
 
-### 3.1 Observations on Response Length
-Our data reveals that total inference duration is linearly correlated with output length rather than input prompt complexity. Initial tests show a throughput drop from 10.5 TPS to 7.2 TPS during sustained generation, suggesting the onset of thermal throttling on the mobile quad-core architecture.
+### 3.2 Findings
+The 0.5B parameter model demonstrated a 3.8x increase in average throughput compared to the 3B model. However, initial observation suggests a qualitative "Intelligence Gap" in complex reasoning tasks. On-device AI on quad-core mobile CPUs (i5-8265U) is highly viable at the <1B parameter scale, offering "instant" response times (<12s) even for long-form outputs exceeding 1,500 characters.
+
+### 3.3 Scaling and Thermal Observations
+Our data confirms that total inference duration is governed by output length (token generation) rather than input prompt complexity. 
+
+Key Observations:
+1. **The Warm-up Effect:** In the 3B model, throughput improved from 6.23 TPS to 10.78 TPS as output length increased from 725 to 2,923 characters. This suggests a "computational momentum" where the mobile CPU stabilizes after the initial Time-to-First-Token (TTFT) latency.
+2. **Thermal Constraints:** During sustained generation (Prompt 3, 3B model), the T490 chassis reached peak operating temperature. While the model maintained ~10 TPS for this burst, previous experiments show a degradation to ~7 TPS in sustained sessions exceeding 120 seconds, identifying a clear thermal ceiling for on-device AI on thin-and-light hardware.
 
 ## 4. Discussion and Future Work
 The results indicate that while 3B parameter models are viable for real-time interaction on legacy hardware, the "Inference Stability" is highly vulnerable to background OS tasks. Future work will involve implementing a "Context-Aware Cooling" logic and testing the efficiency of 1-bit (BitNet) architectures to further reduce the computational load on the CPU.
