@@ -11,3 +11,5 @@ psutil
 as our "Telemetry Module." It allows the brain to 
 monitor its own "metabolism" (RAM and CPU usage).'''
 chromadb
+moondream
+Pillow
