@@ -58,3 +58,15 @@ Project ARIA demonstrates that localized AI is achievable on 8th-generation mobi
 [1] Vaswani, A., et al. (2017). "Attention Is All You Need."
 [2] Gerganov, G. (2023). "llama.cpp: Port of Facebook's LLaMA model in C/C++."
 [3] Alibaba Qwen Team. (2024). "Qwen 2.5: A Language Model Series."
+
+### 3.4 Multimodal Pipeline Latency (Table 2)
+To evaluate the system's "Total Intelligence" latency, we measured a three-stage pipeline: Vision -> Retrieval -> Reasoning.
+
+| Stage | Process | Latency (s) | Model Used |
+| :--- | :--- | :--- | :--- |
+| **Stage 1** | Image-to-Text (Vision) | 29.98 s | Moondream (1.6B) |
+| **Stage 2** | Semantic Retrieval | < 0.1 s | all-MiniLM-L6-v2 |
+| **Stage 3** | Contextual Reasoning | 42.18 s | Qwen 2.5 (3B) |
+| **Total** | **End-to-End Inference** | **72.77 s** | **Hybrid** |
+
+**Observation:** The "Modal Switching Penalty" was measured at ~0.6s, representing less than 1% of the total pipeline duration. This indicates that 16GB of DDR4 RAM is sufficient to buffer multiple specialized model weights simultaneously, preventing expensive disk-swapping (SSD churn).
