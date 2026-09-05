@@ -1,15 +1,24 @@
-requests
-numpy<2.0.0
-sentence-transformers
-transformers
-torch
-rich
-pymupdf
-ollama
-psutil
-'''In your research paper, we will describe psutil 
-as our "Telemetry Module." It allows the brain to 
-monitor its own "metabolism" (RAM and CPU usage).'''
-chromadb
-moondream
-Pillow
+# --- Core Connectivity ---
+requests==2.32.3
+ollama==0.3.3
+
+# --- AI & Mathematical Engines ---
+# Note: For T490/CPU-only, install torch using the --index-url mentioned below
+torch==2.3.1
+numpy==1.26.4
+transformers==4.42.4
+sentence-transformers==3.0.1
+
+# --- Memory & Persistence (RAG) ---
+chromadb==0.5.5
+pymupdf==1.24.5
+
+# --- Sensory & Vision Processing ---
+Pillow==10.4.0
+
+# --- Telemetry & Benchmarking (Research) ---
+psutil==5.9.8
+
+# --- User Interface ---
+streamlit==1.36.0
+rich==13.7.1
